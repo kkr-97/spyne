@@ -6,7 +6,6 @@ const Spinner = () => {
     <div
       className="loader-container mt-5"
       style={{
-        height: "100vh",
         display: "flex",
         justifyContent: "center",
       }}

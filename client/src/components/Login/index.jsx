@@ -39,7 +39,7 @@ function Login() {
     dispatch(onSuccessfulLogin({ username, userId }));
     setMsg(message);
     setSignInStatus(status.success);
-    navigate("/");
+    navigate("/", { replace: true });
   };
 
   const handleLogin = async (e) => {

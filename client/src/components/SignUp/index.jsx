@@ -46,7 +46,7 @@ function SignUp() {
           userId: response.data.id,
         })
       );
-      navigate("/");
+      navigate("/", { replace: true });
     } catch (err) {
       console.log("Error: ", err);
       setSignInStatus(status.failed);
