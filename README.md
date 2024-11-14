@@ -24,8 +24,7 @@ The Car Management Application allows users to manage car listings with features
 
 ## 🎥 Demo
 Check out the live demo of the application:
-- [Frontend (Vercel)](https://your-vercel-url.com)
-- [Backend (Render)](https://your-render-url.com)
+- [Frontend (Vercel)](https://spyne-six.vercel.app/)
 
 ---
 
