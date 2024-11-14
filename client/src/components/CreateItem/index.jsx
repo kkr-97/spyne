@@ -42,8 +42,7 @@ const CreateItem = () => {
           "https://api.cloudinary.com/v1_1/da9xcuzgg/image/upload",
           data
         );
-        console.log(res);
-        setImages((prevImages) => [...prevImages, res.data.url]);
+        setImages((prevImages) => [...prevImages, res.data.secure_url]);
       });
     } catch (error) {
       console.error("Error converting images to Base64:", error);
@@ -57,11 +56,11 @@ const CreateItem = () => {
     try {
       const token = Cookie.get("token"); // Assuming you're storing JWT token in localStorage
       await axios.post(
-        "http://localhost:3001/create-item",
+        "https://spyne-1kdl.onrender.com/create-item",
         {
           title,
           description,
-          tags,
+          tags: tags ? tags.split(",").map((tag) => tag.trim()) : [],
           carType,
           company,
           dealer,

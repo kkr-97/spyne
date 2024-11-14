@@ -25,11 +25,14 @@ const UpdateCar = () => {
   useEffect(() => {
     const fetchCarDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/cars/${id}`, {
-          headers: {
-            "auth-token": Cookie.get("token"),
-          },
-        });
+        const response = await axios.get(
+          `https://spyne-1kdl.onrender.com/cars/${id}`,
+          {
+            headers: {
+              "auth-token": Cookie.get("token"),
+            },
+          }
+        );
         const { title, description, tags, carType, company, dealer, images } =
           response.data;
         setCarDetails({
@@ -64,7 +67,7 @@ const UpdateCar = () => {
       };
 
       const response = await axios.put(
-        `http://localhost:3001/products/${id}`,
+        `https://spyne-1kdl.onrender.com/products/${id}`,
         updatedCar,
         {
           headers: {

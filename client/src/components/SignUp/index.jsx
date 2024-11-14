@@ -29,11 +29,14 @@ function SignUp() {
     e.preventDefault();
     setSignInStatus(status.loading);
     try {
-      const response = await axios.post("http://localhost:3001/register", {
-        email,
-        username,
-        password,
-      });
+      const response = await axios.post(
+        "https://spyne-1kdl.onrender.com/register",
+        {
+          email,
+          username,
+          password,
+        }
+      );
       Cookie.set("token", response.data.token, { expires: 1 });
       Cookie.set("username", response.data.username, { expires: 1 });
       Cookie.set("userId", response.data.id, { expires: 1 });

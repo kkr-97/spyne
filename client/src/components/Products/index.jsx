@@ -28,12 +28,15 @@ const ProductList = () => {
   const fetchCars = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("http://localhost:3001/user-cars", {
-        params: { userId: userId, search: search, ...filters },
-        headers: {
-          "auth-token": Cookie.get("token"),
-        },
-      });
+      const response = await axios.get(
+        "https://spyne-1kdl.onrender.com/user-cars",
+        {
+          params: { userId: userId, search: search, ...filters },
+          headers: {
+            "auth-token": Cookie.get("token"),
+          },
+        }
+      );
       setCars(response.data);
     } catch (error) {
       console.error("Error fetching cars:", error);

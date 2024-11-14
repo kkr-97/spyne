@@ -46,10 +46,13 @@ function Login() {
     e.preventDefault();
     setSignInStatus(status.loading);
     try {
-      const response = await axios.post("http://localhost:3001/login", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "https://spyne-1kdl.onrender.com/login",
+        {
+          email,
+          password,
+        }
+      );
       onSuccessfulSignIn({
         token: response.data.token,
         username: response.data.username,

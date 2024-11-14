@@ -68,11 +68,14 @@ const CarDetailPage = () => {
   useEffect(() => {
     const fetchCarDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/cars/${id}`, {
-          headers: {
-            "auth-token": Cookie.get("token"),
-          },
-        });
+        const response = await axios.get(
+          `https://spyne-1kdl.onrender.com/cars/${id}`,
+          {
+            headers: {
+              "auth-token": Cookie.get("token"),
+            },
+          }
+        );
         setCarDetails(response.data);
       } catch (error) {
         console.error("Error fetching car details:", error);
@@ -84,7 +87,11 @@ const CarDetailPage = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:3001/products/${id}`);
+      await axios.delete(`https://spyne-1kdl.onrender.com/products/${id}`, {
+        headers: {
+          "auth-token": Cookie.get("token"),
+        },
+      });
       navigate("/products");
     } catch (error) {
       console.error("Error deleting car:", error);

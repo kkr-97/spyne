@@ -267,7 +267,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: "http://localhost:3001",
+        url: "https://spyne-1kdl.onrender.com",
         description: "Development server",
       },
     ],
