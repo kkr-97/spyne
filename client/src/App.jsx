@@ -1,11 +1,42 @@
-
-// import './App.css'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import Login from "./components/Login";
+import store from "./store/store.js";
+import SignUp from "./components/SignUp/index.jsx";
+import Navbar from "./components/Navbar.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import Home from "./components/Home/index.jsx";
+import CreateItem from "./components/CreateItem";
+import CarDetailPage from "./components/CarDetailPage";
+import NotFound from "./components/NotFound.jsx";
 
 function App() {
-
   return (
-    <h1>Home Page</h1>
-  )
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/register" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/*"
+            element={
+              <>
+                <Navbar />
+                <Routes>
+                  <Route element={<ProtectedRoute />}>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/create-item" element={<CreateItem />} />
+                    <Route path="/car/:id" element={<CarDetailPage />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Route>
+                </Routes>
+              </>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
+  );
 }
 
-export default App
+export default App;
