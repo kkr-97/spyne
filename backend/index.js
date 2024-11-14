@@ -103,6 +103,61 @@ app.post(
   }
 );
 
+app.post("/create-item", async (req, res) => {
+  try {
+    const {
+      title,
+      description,
+      tags,
+      carType,
+      company,
+      dealer,
+      images,
+      userId,
+    } = req.body;
+
+    const newCar = new CarModel({
+      title,
+      description,
+      tags,
+      company,
+      carType,
+      dealer,
+      userId,
+      images: images,
+    });
+
+    await newCar.save();
+
+    res.status(201).json({ message: "Car item created successfully", newCar });
+  } catch (error) {
+    console.error("Error creating car item:", error);
+    res.status(500).json({ error: "Failed to create car item" });
+  }
+});
+
+app.get("/user-cars", async (req, res) => {
+  try {
+    const { userId, search } = req.query; // Fetch userId and search keyword from query parameters
+    const regex = new RegExp(search, "i"); // Create a case-insensitive regex for searching
+
+    // Search cars by title, description, or tags
+    const cars = await CarModel.find({
+      userId: userId,
+      $or: [
+        { title: { $regex: regex } },
+        { description: { $regex: regex } },
+        { tags: { $elemMatch: { $regex: regex } } },
+      ],
+    });
+
+    res.status(200).json(cars); // Return the cars matching the search
+  } catch (error) {
+    console.error("Error fetching cars:", error);
+    res.status(500).json({ error: "Failed to fetch cars" });
+  }
+});
+
 const connectDB = async () => {
   await mongoose
     .connect(process.env.MONGODB_URI)

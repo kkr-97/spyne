@@ -1,0 +1,39 @@
+.search-bar {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .car-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .car-item {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    width: 30%;
+    cursor: pointer;
+  }
+  
+  .car-item h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .car-item p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+  
+  .car-images img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 5px;
+  }
+  

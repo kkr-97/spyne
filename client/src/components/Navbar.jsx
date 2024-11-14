@@ -11,14 +11,9 @@ const navItems = [
     icon: "fa-solid fa-house",
   },
   {
-    path: "/dashboard",
-    name: "Dashboard",
+    path: "/products",
+    name: "Products",
     icon: "fa-solid fa-list",
-  },
-  {
-    path: "/stats",
-    name: "Stats",
-    icon: "fa-solid fa-chart-line",
   },
 ];
 
@@ -60,12 +55,7 @@ function Navbar() {
       {isDropDownOpen && (
         <div className="drop-down bg-secondary p-3">
           <h5 className="d-flex align-items-center profile-name border-bottom py-2">
-            <img
-              src="/assets/images/hello.png"
-              style={{ width: "32px" }}
-              alt="hello"
-            />
-            {userName}
+            Hello {userName}
           </h5>
 
           <button className="btn btn-warning" onClick={onLogout}>

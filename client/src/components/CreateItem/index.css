@@ -1,0 +1,35 @@
+/* CreateItem.css */
+.create-item-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .create-item-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .create-item-form input,
+  .create-item-form textarea,
+  .create-item-form button {
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .create-item-form button {
+    background-color: #4fa94d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .create-item-form button:hover {
+    background-color: #3e8e41;
+  }
+  

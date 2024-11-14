@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const carSchema = new mongoose.Schema(
   {
     userId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       ref: "User",
       required: true,
     },
@@ -18,6 +18,6 @@ const carSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const CarModel = new mongoose.model("CarDetail", carSchema);
+const CarModel = new mongoose.model("carDetails", carSchema);
 
 export default CarModel;
