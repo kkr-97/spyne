@@ -115,7 +115,7 @@ const CarDetailPage = () => {
       <div className="row">
         <div className="col-12">
           <button onClick={handleBack} className="btn btn-secondary">
-            <i class="fa-solid fa-left-long"></i> Back
+            <i className="fa-solid fa-left-long"></i> Back
           </button>
         </div>
 

@@ -32,18 +32,25 @@ const CreateItem = () => {
     if (!files) return;
 
     try {
-      files.map(async (item) => {
+      const uploadPromises = files.map((item) => {
         const data = new FormData();
         data.append("file", item);
         data.append("upload_preset", "spyne_assignment");
         data.append("cloud_name", "da9xcuzgg");
 
-        const res = await axios.post(
+        return axios.post(
           "https://api.cloudinary.com/v1_1/da9xcuzgg/image/upload",
           data
         );
-        setImages((prevImages) => [...prevImages, res.data.secure_url]);
       });
+
+      const responses = await Promise.all(uploadPromises);
+
+      const newImageUrls = responses.map(
+        (res) => res.data.secure_url || res.data.url
+      );
+
+      setImages((prevImages) => [...prevImages, ...newImageUrls]);
     } catch (error) {
       console.error("Error converting images to Base64:", error);
     }
@@ -88,7 +95,7 @@ const CreateItem = () => {
       <div className="row">
         <div className="col-12">
           <Link to="/products" className="btn btn-secondary">
-            <i class="fa-solid fa-left-long"></i> Back
+            <i className="fa-solid fa-left-long"></i> Back
           </Link>
         </div>
         <div className="col-12 create-item-container">
