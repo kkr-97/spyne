@@ -90,6 +90,16 @@ function SignUp() {
           />
         </div>
 
+        {msg && (
+          <p
+            className={`m-0 ${
+              signInStatus === status.success ? "text-success" : "text-danger"
+            }`}
+          >
+            *{msg}
+          </p>
+        )}
+
         <button className="btn btn-warning mt-2" type="submit">
           {signInStatus === status.loading ? (
             <Spinner color="#000" />

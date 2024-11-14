@@ -3,13 +3,20 @@ import { Oval } from "react-loader-spinner";
 
 const Spinner = () => {
   return (
-    <div className="loader-container">
+    <div
+      className="loader-container mt-5"
+      style={{
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
       <Oval
         height={80}
         width={80}
-        color="#4fa94d"
+        color="#3b82f6"
         ariaLabel="loading"
-        secondaryColor="#4fa94d"
+        secondaryColor="#3b82f620"
         strokeWidth={2}
         strokeWidthSecondary={2}
       />

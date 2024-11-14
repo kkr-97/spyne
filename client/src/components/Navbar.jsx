@@ -34,7 +34,7 @@ function Navbar() {
   };
 
   const Profile = () => (
-    <div className="position-relative align-items-center justify-content-center">
+    <div className="profile position-relative align-items-center justify-content-center">
       <div
         onClick={onClickProfile}
         className="profile-container d-flex align-items-center"
@@ -67,15 +67,14 @@ function Navbar() {
   );
 
   return (
-    <nav className="navbar navbar-expand-md bg-dark navbar-dark border-bottom border-secondary p-2 mb-4 position-sticky z-1 top-0">
+    <nav className="navbar navbar-expand-md bg-dark navbar-dark border-bottom border-secondary p-2 position-sticky z-1 top-0">
       <div className="container">
         <NavLink className="navbar-brand" to="/">
-          Spyne
-          {/* <img
-            src="assets/images/journaling.png"
+          <img
+            src="https://spyne-static.s3.amazonaws.com/AI-tools/photo-upscaler/SpyneLogo.svg"
             alt="logo"
             style={{ height: "2.5rem", marginLeft: "4px" }}
-          /> */}
+          />
         </NavLink>
 
         <div

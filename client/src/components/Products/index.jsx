@@ -1,28 +1,40 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import Cookie from "js-cookie";
 
+import Spinner from "../Spinner";
 import "./index.css";
 
 const ProductList = () => {
   const [cars, setCars] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
-  const userId = useSelector((state) => state.user.userId); // Get userId from redux state
+  const [showFilterPopup, setShowFilterPopup] = useState(false);
+  const [filters, setFilters] = useState({
+    carType: "",
+    company: "",
+    dealer: "",
+  });
+
+  const userId = useSelector((state) => state.user.userId);
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchCars();
-  }, [search]); // Re-fetch cars when search query changes
+  }, []); // Re-fetch cars when search query or filters change
 
   const fetchCars = async () => {
     setLoading(true);
     try {
       const response = await axios.get("http://localhost:3001/user-cars", {
-        params: { userId: userId, search: search },
+        params: { userId: userId, search: search, ...filters },
+        headers: {
+          "auth-token": Cookie.get("token"),
+        },
       });
-      setCars(response.data); // Update state with fetched cars
+      setCars(response.data);
     } catch (error) {
       console.error("Error fetching cars:", error);
     } finally {
@@ -31,29 +43,53 @@ const ProductList = () => {
   };
 
   const handleSearchChange = (e) => {
-    setSearch(e.target.value); // Update search state
+    setSearch(e.target.value);
   };
 
   const handleViewCar = (carId) => {
-    navigate(`/product/${carId}`); // Navigate to the detailed page of the selected car
+    navigate(`/product/${carId}`);
+  };
+
+  const toggleFilterPopup = () => {
+    setShowFilterPopup(!showFilterPopup);
+  };
+
+  const handleFilterChange = (e) => {
+    setFilters({ ...filters, [e.target.name]: e.target.value });
+  };
+
+  const applyFilters = () => {
+    setShowFilterPopup(false);
+    fetchCars();
   };
 
   return (
-    <div className="container">
+    <div className="container mt-5">
       <div className="row">
         <div className="col">
           <h2>Your Cars</h2>
 
-          <input
-            type="text"
-            placeholder="Search your cars..."
-            value={search}
-            onChange={handleSearchChange}
-            className="search-bar"
-          />
+          <div className="d-flex align-items-center">
+            <input
+              type="search"
+              placeholder="Search your cars..."
+              value={search}
+              onChange={handleSearchChange}
+              className="search-bar"
+            />
+            <button
+              className="btn btn-secondary mx-2"
+              onClick={toggleFilterPopup}
+            >
+              Filters <i className="fa-solid fa-filter"></i>
+            </button>
+            <Link className="btn btn-primary" to="/create-item">
+              Add <i className="fa-solid fa-plus"></i>
+            </Link>
+          </div>
 
           {loading ? (
-            <p>Loading cars...</p>
+            <Spinner />
           ) : (
             <div className="car-list">
               {cars.length > 0 ? (
@@ -71,7 +107,7 @@ const ProductList = () => {
                     <p>
                       <strong>Tags:</strong> {car.tags.join(", ")}
                     </p>
-                    <div className="car-images">
+                    <div className="car-images-prod">
                       {car.images.slice(0, 3).map((image, index) => (
                         <img
                           key={index}
@@ -85,6 +121,42 @@ const ProductList = () => {
               ) : (
                 <p>No cars found</p>
               )}
+            </div>
+          )}
+
+          {/* Filter Popup */}
+          {showFilterPopup && (
+            <div className="filter-popup">
+              <h4>Apply Filters</h4>
+              <div className="filter-inputs">
+                <input
+                  type="text"
+                  name="carType"
+                  placeholder="Car Type"
+                  value={filters.carType}
+                  onChange={handleFilterChange}
+                />
+                <input
+                  type="text"
+                  name="company"
+                  placeholder="Company"
+                  value={filters.company}
+                  onChange={handleFilterChange}
+                />
+                <input
+                  type="text"
+                  name="dealer"
+                  placeholder="Dealer"
+                  value={filters.dealer}
+                  onChange={handleFilterChange}
+                />
+              </div>
+              <button className="btn btn-primary" onClick={applyFilters}>
+                Apply Filters
+              </button>
+              <button className="btn btn-secondary" onClick={toggleFilterPopup}>
+                Close
+              </button>
             </div>
           )}
         </div>

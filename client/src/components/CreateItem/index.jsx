@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Cookie from "js-cookie";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Spinner from "../Spinner";
 
@@ -70,7 +70,7 @@ const CreateItem = () => {
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            "auth-token": Cookie.get("token"),
           },
         }
       );
@@ -85,9 +85,14 @@ const CreateItem = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container mt-5">
       <div className="row">
-        <div className="col create-item-container">
+        <div className="col-12">
+          <Link to="/products" className="btn btn-secondary">
+            <i class="fa-solid fa-left-long"></i> Back
+          </Link>
+        </div>
+        <div className="col-12 create-item-container">
           <h2>Create New Car Item</h2>
           <form onSubmit={handleSubmit} className="create-item-form">
             <input
@@ -127,6 +132,7 @@ const CreateItem = () => {
               value={dealer}
               onChange={(e) => setDealer(e.target.value)}
             />
+            <label>Upload Images(10 max.)</label>
             <input
               type="file"
               accept="image/*"

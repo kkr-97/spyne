@@ -10,6 +10,7 @@ import CreateItem from "./components/CreateItem";
 import CarDetailPage from "./components/CarDetailPage";
 import NotFound from "./components/NotFound.jsx";
 import Products from "./components/Products/index.jsx";
+import UpdateCar from "./components/UpdateItem/index.jsx";
 
 function App() {
   return (
@@ -28,7 +29,9 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/products" element={<Products />} />
                     <Route path="/create-item" element={<CreateItem />} />
-                    <Route path="/car/:id" element={<CarDetailPage />} />
+                    <Route path="/product/:id" element={<CarDetailPage />} />
+
+                    <Route path="/update-car/:id" element={<UpdateCar />} />
                     <Route path="*" element={<NotFound />} />
                   </Route>
                 </Routes>

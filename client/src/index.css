@@ -41,7 +41,11 @@ body {
 }
 
 .nav-link:hover {
-  color: #ffe60090 !important;
+  color: #ffe60090;
+}
+
+.profile{
+  cursor: pointer;
 }
 
 .navbar-toggler{
@@ -55,6 +59,7 @@ body {
   top:40px;
   right: -10px;
   z-index: 10;
+  cursor: pointer;
 }
 
 @media (max-width: 767px){
